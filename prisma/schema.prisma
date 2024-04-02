@@ -20,17 +20,62 @@ model User {
   lastName      String
   email         String   @unique
   password_hash String
-  profile       Profile  @relation(fields: [profileId], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  profileId     Int      @unique
+  reptiles      Reptile[]
+  schedules     Schedule[]
 }
 
-model Profile {
-  id              Int      @id @default(autoincrement())
-  age             Int?
-  profileImageUrl String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  user            User?
+model Reptile {
+  id            Int      @id @default(autoincrement())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int
+  species       String
+  name          String
+  sex           String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  feedings      Feeding[]
+  records       HusbandryRecord[]
+  schedules     Schedule[]
+}
+
+model Feeding {
+  id            Int      @id @default(autoincrement())   
+  reptile       Reptile  @relation(fields: [reptileId], references: [id])
+  reptileId     Int     
+  foodItem      String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model HusbandryRecord {
+  id            Int      @id @default(autoincrement())   
+  reptile       Reptile  @relation(fields: [reptileId], references: [id])
+  reptileId     Int
+  length        Float
+  weight        Float
+  temperature   Float
+  humidity      Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Schedule {
+  id            Int      @id @default(autoincrement())   
+  reptile       Reptile  @relation(fields: [reptileId], references: [id])
+  reptileId     Int
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int
+  type          String
+  description   String
+  monday        Boolean
+  tuesday       Boolean
+  wednesday     Boolean
+  thursday      Boolean
+  friday        Boolean
+  saturday      Boolean
+  sunday        Boolean
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt 
 }

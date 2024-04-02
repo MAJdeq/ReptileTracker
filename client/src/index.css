@@ -1,3 +1,39 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: gray;
+}
+
+
+.my-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links {
+  display: flex; /* Use flexbox to align items horizontally */
+}
+
+.my-nav .logo{
+  font-size: 50px;
+  color: black;
+}
+
+.links > * {
+  font-size: 30px;
+  margin-right: 10px; /* Add right margin between individual link items */
+}
+
+.links > *:last-child {
+  margin-right: 0; /* Remove margin from the last link item */
+}
+
+.welcome {
+  display: flex; /* Use flexbox to align items horizontally */
+  align-items: center;
+}
+
+.welcome button {
+  margin-left: 10px; /* Add left margin to the button */
+  margin-top: 8px;
 }
